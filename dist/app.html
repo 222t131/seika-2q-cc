@@ -1,12 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 <head>
-
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>時刻予約ページ</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://unpkg.com/dayjs/dayjs.min.js"></script>
 </head>
+
 <body>
-	aaaa
-	
+    <div class="container">
+        <h1>時刻予約ページ</h1>
+		<label for="date">日にちを選択してください:</label>
+		<input type="date" id="date">
+		<br>
+        <label for="time">予約時間を選択してください:</label>
+        <input type="time" id="time">
+        <button onclick="makeReservation()">予約する</button>
+        <p id="result"></p>
+    </div>
+
 	<script src="app.js"></script> 
 </body>
 </html>

@@ -16,8 +16,9 @@
     "style-loader": "^4.0.0",
     "webpack": "^5.92.0",
     "webpack-cli": "^5.1.4"
-  }, 
+  },
   "dependencies": {
+    "dayjs": "^1.11.12",
     "just-validate": "^4.3.0"
   }
 }
