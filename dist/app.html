@@ -4,22 +4,94 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>時刻予約ページ</title>
-    <link rel="stylesheet" href="styles.css">
+    <style>
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+        .confirmation {
+            margin-top: 20px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+            display: none;
+        }
+    </style>
     <script src="https://unpkg.com/dayjs/dayjs.min.js"></script>
-</head>
 
+</head>
 <body>
     <div class="container">
         <h1>時刻予約ページ</h1>
-		<label for="date">日にちを選択してください:</label>
-		<input type="date" id="date">
-		<br>
-        <label for="time">予約時間を選択してください:</label>
-        <input type="time" id="time">
-        <button onclick="makeReservation()">予約する</button>
-        <p id="result"></p>
+        <form id="basic_form">
+            <div>
+                <label>
+                    <span>名前を入力してください</span>
+                    <div>
+                        <input id="name" type="text" name="name" placeholder="名前を入力してください。" />
+                    </div>
+                </label>
+            </div>
+            <br>
+            <div>
+                <label>
+                    <span>月日を入力してください</span>
+                    <div>
+                        <input id="date" type="date" name="date">
+                    </div>
+                </label>
+            </div>
+            <br>
+            <div>
+                <label>
+                    <span>時間を入力してください</span>
+                    <div>
+                        <input id="time" type="time" name="time">
+                    </div>
+                </label>
+            </div>
+            <br>
+            <button type="submit">確認する</button>
+        </form>
+
+        <div id="confirmation" class="confirmation">
+            <h2>確認画面</h2>
+            <p id="confirmationText"></p>
+        </div>
     </div>
 
-	<script src="app.js"></script> 
+    <script>
+        function onsubmit(event) {
+            event.preventDefault();
+
+            const name = document.getElementById("name").value;
+            const date = document.getElementById("date").value;
+            const time = document.getElementById("time").value;
+
+            console.log('Name:', name);
+            console.log('Date:', date);
+            console.log('Time:', time);
+
+            if (!name || !date || !time) {
+                alert("すべてのフィールドに入力してください。");
+                return;
+            }
+            const formattedDate = dayjs(date).format('YYYY年M月D日');
+            const formattedTime = dayjs(time, "HH:mm").format('H時m分');
+
+            console.log('Formatted Date:', formattedDate);
+            console.log('Formatted Time:', formattedTime);
+
+            const confirmationText = `${name}さんが予約した日付は${formattedDate}です。`;
+
+            document.getElementById("confirmationText").textContent = confirmationText;
+
+            document.getElementById("confirmation").style.display = "block";
+        }
+        document.getElementById('basic_form').addEventListener('submit', onsubmit);
+    </script>
 </body>
 </html>
